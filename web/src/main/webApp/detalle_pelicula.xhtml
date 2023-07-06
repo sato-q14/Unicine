@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">#{detallePeliculaBean.pelicula.nombre}</ui:define>
+    <ui:define name="content">
+
+            <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+                <div class="col-md-6 px-0">
+                    <h1 class="display-4 fst-italic">#{detallePeliculaBean.pelicula.nombre}</h1>
+                    <p class="lead my-3"><iframe width="1600" height="500" src="https://www.youtube.com/embed/ZaD7iZR0-5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe></p>
+                    <p class="lead mb-0"><a href="#" class="text-white fw-bold">#{detallePeliculaBean.pelicula.estadoPelicula}</a></p>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">#{detallePeliculaBean.pelicula.nombre}</strong>
+                            <h5 class="mb-0">#{detallePeliculaBean.pelicula.sinopsis}</h5>
+                            <div class="mb-1 text-muted">#{detallePeliculaBean.pelicula.reparto}</div>
+                            <h4>Generos</h4>
+                            <a href="#" class="stretched-link">#{detallePeliculaBean.pelicula.generos}</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="imagen-pelicula" src="#{detallePeliculaBean.pelicula.imagenPrincipal}" width="200" height="250" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></img>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+    </ui:define>
+</ui:composition>
+</html>
+
+
+
+

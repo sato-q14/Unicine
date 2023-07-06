@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Gestionar teatros</ui:define>
+
+<ui:define name="content">
+
+    <h:form id="crud_adminTeatro">
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="Agregar" icon="pi pi-plus" action="#{adminTeatroBean.crearAdminTeatroDialogo}" update="dialogo_crear" styleClass="ui-button-success me-3" oncomplete="PF('crear_adminTeatro').show()"/>
+                <p:commandButton id="btn_eliminar" value="#{adminTeatroBean.textoBorrar}" icon="pi pi-trash" disabled="#{adminTeatroBean.adminteatrosSeleccionados.size()==0}" styleClass="ui-button-danger" action="#{adminTeatroBean.eliminarAdminTeatro}" update="crud_adminTeatro:lista, @this" />
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <p:dataTable id="lista" value="#{adminTeatroBean.adminteatros}" var="admin_teatro" paginator="true" rows="10" rowKey="#{admin_teatro.id}" paginatorPosition="bottom"
+                     selection="#{adminTeatroBean.adminteatrosSeleccionados}" rowSelectMode="" >
+
+            <p:ajax event="rowSelect" update="crud_adminTeatro:btn_eliminar" />
+            <p:ajax event="rowUnselect" update="crud_adminTeatro:btn_eliminar" />
+            <p:ajax event="rowSelectCheckbox" update="crud_adminTeatro:btn_eliminar" />
+            <p:ajax event="rowUnselectCheckbox" update="crud_adminTeatro:btn_eliminar" />
+            <p:ajax event="toggleSelect" update="crud_adminTeatro:btn_eliminar" />
+
+
+            <p:column selectionMode="multiple" exportable="false"></p:column>
+
+            <p:column headerText="Id">
+                <h:outputText value="#{admin_teatro.id}"/>
+            </p:column>
+
+            <p:column headerText="email">
+                <h:outputText value="#{admin_teatro.email}"/>
+            </p:column>
+
+            <p:column headerText="password">
+                <h:outputText value="#{admin_teatro.password}"/>
+            </p:column>
+
+
+
+            <p:column headerText="">
+                <p:commandButton styleClass="edit-button rounded-button ui-button-success" process="@this" icon="pi pi-pencil" action="#{adminTeatroBean.seleccionarAdminTeatro(admin_teatro)}" oncomplete="PF('crear_adminTeatro').show()" update="dialogo_crear"/>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+    <p:dialog id="dialogo_crear" widgetVar="crear_adminTeatro" modal="true" header="#{adminTeatroBean.mensajeCrear}" showEffect="fade">
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+
+
+                <p:outputLabel for="id_adminTeatro" value="Id:" />
+                <p:inputText id="id_adminTeatro" value="#{adminTeatroBean.adminTeatro.id}" required="true" />
+                <p:message for="id_adminTeatro" />
+
+                <p:outputLabel for="email_adminTeatro" value="Email:" />
+                <p:inputText id="email_adminTeatro"  value="#{adminTeatroBean.adminTeatro.email}" required="true" />
+                <p:message for="email_adminTeatro" />
+
+                <p:outputLabel for="password_adminTeatro" value="password:" />
+                <p:inputText id="password_adminTeatro" value="#{adminTeatroBean.adminTeatro.password}" required="true" feedback="true"  />
+                <p:message for="password_adminTeatro" />
+
+
+
+
+            </h:panelGrid>
+            <p:commandButton value="#{adminTeatroBean.mensajeCrear}" action="#{adminTeatroBean.crearAdminTeatro}"  update="@form,crud_adminTeatro:lista" />
+            <p:growl for="mensaje_bean" showDetail="true"/>
+        </h:form>
+    </p:dialog>
+
+</ui:define>
+</ui:composition>
+</html>
